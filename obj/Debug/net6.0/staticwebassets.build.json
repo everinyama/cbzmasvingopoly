@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "MBUJQZUoC1w3I3nmIrNjGwcs5pKcBd7IzJ7/QkEgg2A=",
+  "Source": "BillPayments_LookUp_Validation",
+  "BasePath": "_content/BillPayments_LookUp_Validation",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

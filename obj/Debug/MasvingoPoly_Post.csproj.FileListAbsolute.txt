@@ -1,4 +1,0 @@
-c:\users\achigome.cbz\documents\visual studio 2013\Projects\MasvingoPoly_Post\bin\Debug\MasvingoPoly_Post.exe.config
-c:\users\achigome.cbz\documents\visual studio 2013\Projects\MasvingoPoly_Post\obj\Debug\MasvingoPoly_Post.csprojResolveAssemblyReference.cache
-C:\xampp\htdocs\xampp\cbz\esbintegrations\masvingopolynotications\obj\Debug\MasvingoPoly_Post.csproj.AssemblyReference.cache
-C:\xampp\htdocs\xampp\cbz\esbintegrations\masvingopolynotications\obj\Debug\MasvingoPoly_Post.csproj.CoreCompileInputs.cache

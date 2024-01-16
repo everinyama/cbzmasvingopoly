@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\BillPayments_LookUp_Validation.props" />
+</Project>
