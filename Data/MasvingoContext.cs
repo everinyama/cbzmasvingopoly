@@ -4,9 +4,12 @@ using System;
 
 namespace BillPayments_LookUp_Validation.Data
 {
-    public class MasvingoContext : DBContext
+    public class MasvingoContext : DbContext
     {
-        public MasvingoContext(DbContextOptions<MasvingoContext> options) : base(options);
+        public MasvingoContext(DbContextOptions<MasvingoContext> options) : base(options)
+        {
+
+        }
 
     }
 }
