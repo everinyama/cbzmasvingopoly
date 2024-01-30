@@ -1,5 +1,7 @@
+using BillPayments_LookUp_Validation.Data;
 using BillPayments_LookUp_Validation.Services;
 using BillPayments_LookUp_Validation.ServicesImplement;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +11,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddScoped<IValidate, ValidateImplement>();
 builder.Services.AddScoped<IValidate_MasvingoPolyCollege, ValidateImplement_MasvingoPolyCollege>();
+// SQL Server Connection
+builder.Services.AddDbContext<MasvingoContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("localDb")));
+
+// Oracle Connection
+builder.Services.AddDbContext<FlexicubeContext>(options =>
+    options.UseOracle(builder.Configuration.GetConnectionString("flexcube")));
 
 var app = builder.Build();
 

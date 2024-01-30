@@ -9,13 +9,20 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
 using System.Xml;
+using BillPayments_LookUp_Validation.Models.Requests;
 
 namespace BillPayments_LookUp_Validation.ServicesImplement
 {
     public class ValidateImplement_MasvingoPolyCollege : ControllerBase, IValidate_MasvingoPolyCollege
     {
+        private readonly IStudentService _studentService;
 
-       public string validate_masvingo_poly(BillValidation billerVallidation)
+        public ValidateImplement_MasvingoPolyCollege(IStudentService studentService)
+        {
+            this._studentService = studentService;
+        }
+
+        public string validate_masvingo_poly(BillValidation billerVallidation)
         {
             // Switch by college
             //
@@ -72,6 +79,13 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
                         {
 
                             MasvingoPolyCollegeSuccess myApiResponse = JsonConvert.DeserializeObject<MasvingoPolyCollegeSuccess>(responseJson)!;
+
+                            GetStudentByIdRequest getStudentById = new()
+                            {
+                                FielD_NAME = myApiResponse.StudentNo,
+                                Lov = myApiResponse.Name
+                            };
+
 
                             // Prepare the MFS/Mobile app developers response object
 
