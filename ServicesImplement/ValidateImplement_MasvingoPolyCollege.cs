@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Xml.Serialization;
 using System.Xml;
 using BillPayments_LookUp_Validation.Models.Requests;
+using BillPayments_LookUp_Validation.Models.Responses;
 
 namespace BillPayments_LookUp_Validation.ServicesImplement
 {
@@ -86,6 +87,12 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
                                 Lov = myApiResponse.Name
                             };
 
+                            GetStudentByIdResponse getStudentResponse = _studentService.GetStudentByIdAsync(getStudentById).Result;
+
+                            if (getStudentResponse != null)
+                            {
+
+                            }
 
                             // Prepare the MFS/Mobile app developers response object
 
