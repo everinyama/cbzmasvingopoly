@@ -14,13 +14,17 @@ using BillPayments_LookUp_Validation.Models.Responses;
 
 namespace BillPayments_LookUp_Validation.ServicesImplement
 {
+
     public class ValidateImplement_MasvingoPolyCollege : ControllerBase, IValidate_MasvingoPolyCollege
     {
-        private readonly IStudentService _studentService;
+        private readonly IStudentService _studentservice;
 
+        public ValidateImplement_MasvingoPolyCollege()
+        {
+        }
         public ValidateImplement_MasvingoPolyCollege(IStudentService studentService)
         {
-            this._studentService = studentService;
+            _studentservice = studentService;
         }
 
         public string validate_masvingo_poly(BillValidation billerVallidation)
@@ -33,6 +37,7 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
             // Create the request object
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
+            request.Proxy = new WebProxy("192.168.4.7:80");
 
             try
             {
@@ -83,16 +88,33 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
 
                             GetStudentByIdRequest getStudentById = new()
                             {
-                                FielD_NAME = myApiResponse.StudentNo,
-                                Lov = myApiResponse.Name
+                                FielD_NAME = "UZ_STUDENT_REG",
+                                Lov = "H220193A_test"
                             };
 
-                            GetStudentByIdResponse getStudentResponse = _studentService.GetStudentByIdAsync(getStudentById).Result;
-
-                            if (getStudentResponse != null)
+                            try
                             {
+                             
+                                GetStudentByIdResponse getStudentResponse = _studentservice.GetStudentByIdAsync(getStudentById).GetAwaiter().GetResult();
 
+                                if (getStudentResponse.StatusCode == 100)
+                                {
+                                    AddStudentRequest addStudentRequest = new()
+                                    {
+                                        LoV_DESC = myApiResponse.Level,
+                                        Lov = myApiResponse.StudentNo,
+                                        FielD_NAME = myApiResponse.Name
+                                    };
+
+                                    AddStudentResponse addStudentResponse = _studentservice.AddNewStudentAsync(addStudentRequest).GetAwaiter().GetResult();
+                                    Console.WriteLine(addStudentResponse);
+                                }
                             }
+                            catch (Exception ex)
+                            {
+                                // Handle exceptions
+                            }
+
 
                             // Prepare the MFS/Mobile app developers response object
 

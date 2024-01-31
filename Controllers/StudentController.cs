@@ -23,19 +23,19 @@ namespace BillPayments_LookUp_Validation.Controllers
             return Ok(response);
         }
 
-        //[HttpGet("GetStudentById/{FielD_NAME}/{Lov}")]
-        //public async Task<IActionResult> GetStudentById(string FielD_NAME, string Lov)
-        //{
-        //    var request = new GetStudentByIdRequest
-        //    {
-        //        FielD_NAME = FielD_NAME,
-        //        Lov = Lov
-        //    };
+        [HttpGet("GetStudentById/{FielD_NAME}/{Lov}")]
+        public async Task<IActionResult> GetStudentById(string FielD_NAME, string Lov)
+        {
+            var request = new GetStudentByIdRequest
+            {
+                FielD_NAME = FielD_NAME,
+                Lov = Lov
+            };
 
-        //    var response = await _studentService.GetStudentByIdAsync(request);
+            var response = await _studentService.GetStudentByIdAsync(request);
 
-        //    return Ok(response);
-        //}
+            return Ok(response);
+        }
 
     }
 }
