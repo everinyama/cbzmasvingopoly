@@ -101,6 +101,12 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
                                     };
 
                                     AddStudentResponse addStudentResponse = _studentService.AddNewStudentAsync(addStudentRequest).GetAwaiter().GetResult();
+
+                                    if(addStudentResponse != null)
+                                    {
+                                        Console.WriteLine("Successfully added a record");
+                                    }
+
                                 }
                             }
                             catch (Exception ex)
