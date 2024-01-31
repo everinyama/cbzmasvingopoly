@@ -11,15 +11,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
 builder.Services.AddScoped<IValidate, ValidateImplement>();
 builder.Services.AddScoped<IValidate_MasvingoPolyCollege, ValidateImplement_MasvingoPolyCollege>();
+builder.Services.AddScoped<IStudentService, StudentService>();
 // SQL Server Connection
 builder.Services.AddDbContext<MasvingoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("localDb")));
 
 // Oracle Connection
-builder.Services.AddDbContext<FlexicubeContext>(options =>
-    options.UseOracle(builder.Configuration.GetConnectionString("flexcube")));
+//builder.Services.AddDbContext<FlexicubeContext>(options =>
+//    options.UseOracle(builder.Configuration.GetConnectionString("flexcube")));
 
 var app = builder.Build();
 
