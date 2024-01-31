@@ -87,12 +87,27 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
                                 Lov = myApiResponse.Name
                             };
 
-                            GetStudentByIdResponse getStudentResponse = _studentService.GetStudentByIdAsync(getStudentById).Result;
-
-                            if (getStudentResponse != null)
+                            try
                             {
-                                
+                                GetStudentByIdResponse getStudentResponse = _studentService.GetStudentByIdAsync(getStudentById).GetAwaiter().GetResult();
+
+                                if (getStudentResponse == null)
+                                {
+                                    AddStudentRequest addStudentRequest = new()
+                                    {
+                                        LoV_DESC = myApiResponse.Level,
+                                        Lov = myApiResponse.StudentNo,
+                                        FielD_NAME = myApiResponse.Name
+                                    };
+
+                                    AddStudentResponse addStudentResponse = _studentService.AddNewStudentAsync(addStudentRequest).GetAwaiter().GetResult();
+                                }
                             }
+                            catch (Exception ex)
+                            {
+                                // Handle exceptions
+                            }
+
 
                             // Prepare the MFS/Mobile app developers response object
 
