@@ -111,7 +111,7 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
                             }
                             catch (Exception ex)
                             {
-                                // Handle exceptions
+                                Console.WriteLine("Successfully added a record"+ ex.Message);
                             }
 
 
