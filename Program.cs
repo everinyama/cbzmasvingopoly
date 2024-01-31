@@ -18,8 +18,8 @@ builder.Services.AddDbContext<MasvingoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("localDb")));
 
 // Oracle Connection
-builder.Services.AddDbContext<FlexicubeContext>(options =>
-    options.UseOracle(builder.Configuration.GetConnectionString("flexcube")));
+//builder.Services.AddDbContext<FlexicubeContext>(options =>
+//    options.UseOracle(builder.Configuration.GetConnectionString("flexcube")));
 
 var app = builder.Build();
 
