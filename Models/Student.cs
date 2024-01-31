@@ -2,9 +2,9 @@
 {
     public class Student
     {
-        public string fielD_NAME {  get; set; }
+        public string FIELD_NAME { get; set; }
         public string LOV { get; set; }
-        public string LOV_DESC { get; set;}
+        public string LOV_DESC { get; set; }
 
     }
 }

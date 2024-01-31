@@ -97,7 +97,7 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
                              
                                 GetStudentByIdResponse getStudentResponse = _studentservice.GetStudentByIdAsync(getStudentById).GetAwaiter().GetResult();
 
-                                if (getStudentResponse == null)
+                                if (getStudentResponse.StatusCode == 100)
                                 {
                                     AddStudentRequest addStudentRequest = new()
                                     {
@@ -107,6 +107,7 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
                                     };
 
                                     AddStudentResponse addStudentResponse = _studentservice.AddNewStudentAsync(addStudentRequest).GetAwaiter().GetResult();
+                                    Console.WriteLine(addStudentResponse);
                                 }
                             }
                             catch (Exception ex)
