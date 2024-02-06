@@ -10,9 +10,10 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
 
         private readonly IConfiguration _config;
 
-        public WalletAccountService(HttpClient httpClient)
+        public WalletAccountService(HttpClient httpClient, IConfiguration config)
         {
             _httpClient = httpClient;
+            _config = config;
         }
 
         public async Task<AccountDetailsResponse> GetAccountDetailsAsync(string token, string identifier)

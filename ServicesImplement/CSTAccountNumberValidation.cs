@@ -4,6 +4,7 @@ using BillPayments_LookUp_Validation.Models.Responses;
 using BillPayments_LookUp_Validation.Services;
 using Newtonsoft.Json;
 using System.Net;
+using System.Net.Http;
 using System.Xml;
 
 namespace BillPayments_LookUp_Validation.ServicesImplement
@@ -11,6 +12,11 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
     public class CSTAccountNumberValidation : ICSTAccountNumberValidation
     {
         private readonly IConfiguration _config;
+        public CSTAccountNumberValidation(IConfiguration config)
+        {
+            _config = config;
+        }
+
         public string validate_cst_account_number(BillValidation billerVallidation)
         {
             string masvingoLookUpUrl = _config["CstLookUpUrl"];

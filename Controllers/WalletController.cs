@@ -11,6 +11,7 @@ namespace BillPayments_LookUp_Validation.Controllers
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IWalletAccountService _walletAccountService;
+        private readonly IConfiguration _config;
 
         public WalletController(IAuthenticationService authenticationService, IWalletAccountService walletAccountService)
         {

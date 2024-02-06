@@ -10,9 +10,10 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
 
         private readonly IConfiguration _config;
 
-        public AuthenticationService(HttpClient httpClient)
+        public AuthenticationService(HttpClient httpClient, IConfiguration config)
         {
             _httpClient = httpClient;
+            _config = config;
         }
 
         public async Task<string?> GetAccessTokenAsync(string email, string password)
