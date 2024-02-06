@@ -2974,19 +2974,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Documents\\CBZ\\czbmasvingopolybillintegration\\BillPayments_LookUp_Validation.csproj",
+      "projectUniqueName": "C:\\xampp\\htdocs\\xampp\\cbz\\esbintegrations\\cbzmasvingopoly\\BillPayments_LookUp_Validation.csproj",
       "projectName": "BillPayments_LookUp_Validation",
-      "projectPath": "C:\\Users\\user\\Documents\\CBZ\\czbmasvingopolybillintegration\\BillPayments_LookUp_Validation.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Documents\\CBZ\\czbmasvingopolybillintegration\\obj\\",
+      "projectPath": "C:\\xampp\\htdocs\\xampp\\cbz\\esbintegrations\\cbzmasvingopoly\\BillPayments_LookUp_Validation.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\xampp\\htdocs\\xampp\\cbz\\esbintegrations\\cbzmasvingopoly\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

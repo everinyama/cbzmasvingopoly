@@ -10,14 +10,16 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
 {
     public class CSTAccountNumberValidation : ICSTAccountNumberValidation
     {
+        private readonly IConfiguration _config;
         public string validate_cst_account_number(BillValidation billerVallidation)
         {
-            string url = "https://easylearn.co.zw/portal2/api/cbz/getStudent?target=13&studentNo=" + billerVallidation.FieldValue;
+            string masvingoLookUpUrl = _config["CstLookUpUrl"];
+            string lookUpUrl = masvingoLookUpUrl + billerVallidation.FieldValue + "/details";
 
             // Create the request object
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(lookUpUrl);
             request.Method = "GET";
-            request.Proxy = new WebProxy("192.168.4.7:80");
+            request.Proxy = new WebProxy(_config["CbzProxyIP"]);
 
             try
             {

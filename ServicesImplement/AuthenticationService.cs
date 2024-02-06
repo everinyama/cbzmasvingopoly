@@ -1,11 +1,14 @@
 ﻿using BillPayments_LookUp_Validation.Models.CST;
 using BillPayments_LookUp_Validation.Services.Authentication;
+using System.Net.Http.Json;
 
 namespace BillPayments_LookUp_Validation.ServicesImplement
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly HttpClient _httpClient;
+
+        private readonly IConfiguration _config;
 
         public AuthenticationService(HttpClient httpClient)
         {
@@ -15,8 +18,8 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
         public async Task<string?> GetAccessTokenAsync(string email, string password)
         {
             var request = new AuthenticationRequest { Email = email, Password = password };
-
-            var response = await _httpClient.PostAsJsonAsync("http://192.168.0.82:8086/api/v1/auth/authenticate", request);
+            var csturl = _config["CstAuthUrl"];
+            var response = await _httpClient.PostAsJsonAsync(/*_config["CstAuthUrl"]*/csturl, request);
 
             if (response.IsSuccessStatusCode)
             {

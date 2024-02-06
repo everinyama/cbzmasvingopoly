@@ -3,8 +3,16 @@ using BillPayments_LookUp_Validation.Services;
 using BillPayments_LookUp_Validation.Services.Authentication;
 using BillPayments_LookUp_Validation.ServicesImplement;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Load app.json configuration
+builder.Configuration.AddJsonFile("appsettings.json");
+
+// Additional configuration sources (optional)
+builder.Configuration.AddEnvironmentVariables();
+builder.Configuration.AddCommandLine(args);
 
 // Add services to the container.
 

@@ -9,6 +9,8 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
     {
         private readonly HttpClient _httpClient;
 
+        private readonly IConfiguration _config;
+
         public StudentService(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -16,12 +18,12 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
 
         public async Task<AddStudentResponse> AddNewStudentAsync(AddStudentRequest request)
         {
-            var apiUrl = "http://192.168.3.150:83/api/Student/AddNewStudent";
+            var studentsApiInsertUrl = _config["CbzInternalStudentsApiInsert"];
 
             var jsonRequest = JsonSerializer.Serialize(request);
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync(apiUrl, content);
+            var response = await _httpClient.PostAsync(studentsApiInsertUrl, content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -39,9 +41,9 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
 
         public async Task<GetStudentByIdResponse> GetStudentByIdAsync(GetStudentByIdRequest request)
         {
-            var apiUrl = $"http://192.168.3.150:83/api/Student/GetStudentById/{request.FielD_NAME}/{request.Lov}";
-
-            var response = await _httpClient.GetAsync(apiUrl);
+            //var apiUrl = $"http://192.168.3.150:83/api/Student/GetStudentById/{request.FielD_NAME}/{request.Lov}";
+            var studentsApiRetrieveUrl = _config["CbzInternalStudentsApiRetrieve"] + request.FielD_NAME + request.Lov;
+            var response = await _httpClient.GetAsync(studentsApiRetrieveUrl);
 
             if (response.IsSuccessStatusCode)
             {
