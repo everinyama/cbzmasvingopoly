@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BillPayments_LookUp_Validation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec1239e13ceaf47734981f5763e696b6624cf652")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1279f74fb88f6dd50b32a2adc8e3a786f63de90c")]
 [assembly: System.Reflection.AssemblyProductAttribute("BillPayments_LookUp_Validation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BillPayments_LookUp_Validation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
