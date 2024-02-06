@@ -11,21 +11,23 @@ namespace BillPayments_LookUp_Validation.Controllers
 
     ////
     ///
-        public class ValidationController : ControllerBase
+    public class ValidationController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
         private readonly ILogger<WeatherForecastController> _logger;
-            private readonly IValidate_MasvingoPolyCollege _Validate_MasvingoPolyCollegeService;
+        private readonly IValidate_MasvingoPolyCollege _Validate_MasvingoPolyCollegeService;
+        private readonly IGetCOHBalance _getCOHBalanceService;
 
-            public ValidationController(ILogger<WeatherForecastController> logger , IValidate_MasvingoPolyCollege MasvingoPolyCollegeService)
+        public ValidationController(ILogger<WeatherForecastController> logger, IValidate_MasvingoPolyCollege MasvingoPolyCollegeService, IGetCOHBalance getCOHBalance)
         {
             _logger = logger;
             _Validate_MasvingoPolyCollegeService = MasvingoPolyCollegeService;
-                
+            _getCOHBalanceService = getCOHBalance;
+
         }
 
         [HttpGet(Name = "Validation")]
@@ -63,7 +65,7 @@ namespace BillPayments_LookUp_Validation.Controllers
                         // Compare the incoming Biller with exixting billers
                         // Get the URL from the matching DB biller 
 
-                        if(billValidation.FieldName == "MPC_STUDENT_NO")
+                        if (billValidation.FieldName == "MPC_STUDENT_NO")
                         {
                             var response = _Validate_MasvingoPolyCollegeService.validate_masvingo_poly(billValidation);
                             return response;
@@ -80,7 +82,21 @@ namespace BillPayments_LookUp_Validation.Controllers
                         //return response;
                         return "Sample DataResponse";
                     }
-                
+                case "BALANCE_ENQ":
+                    {
+                        string xmlString = model.XmlRequestObject!;
+                        BALANCE_ENQ_REQ balanceEnqReq = new();
+                        XmlSerializer serializer = new(typeof(BALANCE_ENQ_REQ));
+                        using (StringReader reader = new(xmlString))
+                        {
+                            balanceEnqReq = (BALANCE_ENQ_REQ)serializer.Deserialize(reader)!;
+                        }
+
+                        var response = _getCOHBalanceService.ReadIncomingEsbRequestAsync(balanceEnqReq, model.ReferenceNumber);
+
+                        return _getCOHBalanceService.SerializeToXml(_getCOHBalanceService.SendAuthRequestAsync(response.Result).Result);
+                    }
+
                 default:
                     {
                         return "Unknown transaction type";

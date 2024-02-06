@@ -23,6 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IValidate, ValidateImplement>();
 builder.Services.AddScoped<IValidate_MasvingoPolyCollege, ValidateImplement_MasvingoPolyCollege>();
+builder.Services.AddScoped<IGetCOHBalance, GetCOHBalance>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IWalletAccountService, WalletAccountService>();
