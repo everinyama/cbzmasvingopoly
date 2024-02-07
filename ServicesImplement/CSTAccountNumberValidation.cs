@@ -11,21 +11,21 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
 {
     public class CSTAccountNumberValidation : ICSTAccountNumberValidation
     {
-        private readonly IConfiguration _config;
-        public CSTAccountNumberValidation(IConfiguration config)
-        {
-            _config = config;
-        }
+        private readonly IConfiguration _configuration;
 
+        public CSTAccountNumberValidation(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public string validate_cst_account_number(BillValidation billerVallidation)
         {
-            string masvingoLookUpUrl = _config["CstLookUpUrl"];
-            string lookUpUrl = masvingoLookUpUrl + billerVallidation.FieldValue + "/details";
+            var cstLookUpUrl = _configuration["CstLookUpUrl"];
+            string url = cstLookUpUrl + billerVallidation.FieldValue + "/details";
 
             // Create the request object
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(lookUpUrl);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
-            request.Proxy = new WebProxy(_config["CbzProxyIP"]);
+            request.Proxy = new WebProxy(_configuration["CbzProxyIP"]);
 
             try
             {

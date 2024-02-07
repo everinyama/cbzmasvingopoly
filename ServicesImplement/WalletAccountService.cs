@@ -1,4 +1,5 @@
-﻿using BillPayments_LookUp_Validation.Models.CST;
+﻿using BillPayments_LookUp_Validation.Models;
+using BillPayments_LookUp_Validation.Models.CST;
 using BillPayments_LookUp_Validation.Services;
 using System.Net.Http.Headers;
 
@@ -7,21 +8,20 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
     public class WalletAccountService : IWalletAccountService
     {
         private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
 
-        private readonly IConfiguration _config;
-
-        public WalletAccountService(HttpClient httpClient, IConfiguration config)
+        public WalletAccountService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _config = config;
+            _configuration = configuration;
         }
 
         public async Task<AccountDetailsResponse> GetAccountDetailsAsync(string token, string identifier)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var csTAccountLookUp = _config["CstLookUpUrl"];
-            //var response = await _httpClient.GetAsync($"http://192.168.0.82:8084/api/v1/client-services/account/{identifier}/details");
-            var response = await _httpClient.GetAsync(csTAccountLookUp + identifier + "/details");
+
+            var cstLookUpUrl = _configuration["CstLookUpUrl"] + identifier + "/details";
+            var response = await _httpClient.GetAsync(cstLookUpUrl);
 
             if (response.IsSuccessStatusCode)
             {

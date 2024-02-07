@@ -18,16 +18,15 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
     public class ValidateImplement_MasvingoPolyCollege : ControllerBase, IValidate_MasvingoPolyCollege
     {
         private readonly IStudentService _studentservice;
-
-        private readonly IConfiguration _config;
+        private readonly IConfiguration _configuration;
 
         public ValidateImplement_MasvingoPolyCollege()
         {
         }
-        public ValidateImplement_MasvingoPolyCollege(IStudentService studentService, IConfiguration config)
+        public ValidateImplement_MasvingoPolyCollege(IStudentService studentService, IConfiguration configuration)
         {
             _studentservice = studentService;
-            _config = config;
+            _configuration = configuration;
         }
 
         public string validate_masvingo_poly(BillValidation billerVallidation)
@@ -35,13 +34,12 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
             // Switch by college
             //
             // Create the request URL
-            //string masvingoLookUpUrl = "https://easylearn.co.zw/portal2/api/cbz/getStudent?target=13&studentNo=" + billerVallidation.FieldValue;
-            string masvingoLookUpUrl = _config["MasvingoLookUpUrl"] + billerVallidation.FieldValue;
-
+            string masvingoLookupUrl = _configuration["MasvingoLookUpUrl"] + billerVallidation.FieldValue;
+            
             // Create the request object
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(masvingoLookUpUrl);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(masvingoLookupUrl);
             request.Method = "GET";
-            //request.Proxy = new WebProxy(_config["CbzProxyIP"]);
+            //request.Proxy = new WebProxy(_configuration["CbzProxyIP"]);
 
             try
             {

@@ -8,22 +8,22 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
     public class StudentService: IStudentService
     {
         private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
 
-        private readonly IConfiguration _config;
-
-        public StudentService(HttpClient httpClient, IConfiguration config)
+        public StudentService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _config = config;
+            _configuration = configuration;
         }
 
         public async Task<AddStudentResponse> AddNewStudentAsync(AddStudentRequest request)
         {
-            var studentsApiInsertUrl = _config["CbzInternalStudentsApiInsert"];
+            var studentInternalApiInsert = _configuration["CbzInternalStudentsApiInsert"];
+
             var jsonRequest = JsonSerializer.Serialize(request);
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync(studentsApiInsertUrl, content);
+            var response = await _httpClient.PostAsync(studentInternalApiInsert, content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -41,10 +41,9 @@ namespace BillPayments_LookUp_Validation.ServicesImplement
 
         public async Task<GetStudentByIdResponse> GetStudentByIdAsync(GetStudentByIdRequest request)
         {
-            /*var apiUrl = $"http://192.168.3.150:83/api/Student/GetStudentById/{request.FielD_NAME}/{request.Lov}";*/
-            var studentsApiRetrieveUrlOrg = _config["CbzInternalStudentsApiRetrieve"];
-            var studentsApiRetrieveUrl = studentsApiRetrieveUrlOrg + request.FielD_NAME + request.Lov;
-            var response = await _httpClient.GetAsync(studentsApiRetrieveUrl);
+            var studentInternalApiRetrieve = _configuration["CbzInternalStudentsApiRetrieve"] + request.FielD_NAME + "/" + request.Lov;
+
+            var response = await _httpClient.GetAsync(studentInternalApiRetrieve);
 
             if (response.IsSuccessStatusCode)
             {
